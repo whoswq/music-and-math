@@ -15,6 +15,7 @@
 \usepackage{fancyhdr}
 \usepackage{latexsym}
 \usepackage{subfigure}
+\usepackage{cite}
 \CTEXsetup[format={\Large\bfseries}]{section}
 \def\d{\mathrm{d}}
 \def\e{\mathrm{e}}
@@ -26,6 +27,7 @@
 \title{\textbf{鼓的振动模态}}
 \author{王崇斌\;1800011716}
 \date{}
+% 注意，重新定义了微分与偏微分的表达，使之更加简洁
 \makeatletter %使\section中的内容左对齐
 \makeatother
 \begin{document}
@@ -44,7 +46,7 @@
 	圆形薄膜的自由振动（没有耗散，没有外力），比如我们忽略了鼓面的能量耗散：
 	鼓面与空气的相互作用，鼓面本身的阻尼等等。想要建立准确的符合实际的模型，
 	首先需要在物理上对鼓进行分类。
-	\par 鼓作为振动系统可以分为3类[1]：
+	\par 鼓作为振动系统可以分为3类\cite{a}：
 	1.由单个薄膜与封闭的空气室构成（kettledrums），2.由单个薄膜和两侧均开放的空气室构成（tom-toms, congas），
 	3.由两片薄膜与中间封闭的空气室耦合而成（bass drums, snare drums）。可以看到，
 	真实的情况远比理想的薄膜振动要复杂，不仅涉及到鼓面与空气作用导致的能量耗散，甚至
@@ -101,7 +103,7 @@
 	\end{align}
 	\par 这是一般的没有能量耗散的薄膜小振动时所满足的方程，其中应力张量可以是位置
 	和时间的函数，在小振动假设下，一般认为其只是位置的函数。考虑到应力张量总是一
-	个对称张量[2]，可以将上面的波动方程表示为一个更加紧凑的形式，其中使用了求和约定：
+	个对称张量\cite{b}，可以将上面的波动方程表示为一个更加紧凑的形式，其中使用了求和约定：
 	\begin{align}
 		\pdv{}{x^{i}}\left(\sigma_{ij}\pdv{u}{x^{j}}\right) = \rho\pdv{^2 u}{t^2}
 	\end{align}
@@ -163,23 +165,60 @@
 	\begin{align}
 		u(r, \phi, t) = v(r, \phi)T(t)
 	\end{align}
-	将上面这样形式的解线性组合使得其满足初始条件就可以得到定解问题的解。
+	\par 将上面这样形式的解线性组合使得其满足初始条件就可以得到定解问题的解。
 	将上面形式的解代入方程：
 	\begin{align}
-		\frac{1}{c^2}\frac{T^{''(t)}}{T} = \frac{1}{rv(r,\phi)}\pdv{}{r}\left(r\pdv{v}{r}\right)
+		\frac{1}{c^2}\frac{T''(t)}{T} = \frac{1}{rv(r,\phi)}\pdv{}{r}\left(r\pdv{v}{r}\right)
 		 + \frac{1}{r^2 v(r,\phi)}\pdv{^2 V}{\phi^2}
 	\end{align}
-	方程两边没有相同的自变量因此只能等于一个常数，令其为$k^2$，得到两个方程：
+	\par 方程两边没有相同的自变量因此只能等于一个常数，令其为$-\lambda$，得到两个方程：
 	\begin{align}
-		\left\{
-
+		&T{''}(t) + \lambda c^2T(t) = 0\\
+		&\frac{1}{r}\pdv{}{r}\left(r\pdv{v}{r}\right) + \frac{1}{r^2}\pdv{^2 v}{\phi^2} + \lambda v = 0
+	\end{align}
+	\par 其中$v$满足的$r, \phi$方向上的边界条件与$u$的相同（事实上构成了一个偏微
+	分方程本征值问题）。进一步考虑$v$也具有分离变量形式的满足边界条件的解
+	$v(r, \phi) = R(r)\Phi(\phi)$，带入方程可以得到：
+	\begin{align}
+		\frac{r}{R}\dv{}{r}\left(r\dv{R}{r}\right) + \lambda r^{2} = -\frac{1}{\Phi}\dv{^2 \Phi}{\phi^2} = \mu
+	\end{align}
+	\par 通过$v(r, \phi)$满足的边界条件得到$R(r), \Phi(\phi)$满足的边界条件（直接带入）：
+	\begin{align}
+		&\left\{
+			\begin{array}{lr}
+				R(r)\Phi(0) = R(r)\Phi(2\pi)\\
+				R(r)\Phi'(0) = R(r)\Phi'(2\pi)
+			\end{array}
+		\right.\\
+		&\left\{ 
+			\begin{array}{lr}
+				R(0)\Phi(\phi)\quad \mr{finit}\\
+				R(0)\Phi(\phi) = 0
+			\end{array}
 		\right.
 	\end{align}
-	\subsection{有阻尼的情形}
+	\par 考虑到$R,\, \Phi$均不恒等于0（否则只能给出0解），
+	这些边界条件与分离变量产生的两个微分方程构成了常微分方程的特征值
+	问题：
+	\begin{align}
+		&\left\{ 
+			\begin{array}{lr}
+				\displaystyle\frac{1}{r}\dv{}{r}\left(r\dv{R}{r} \right) + \left(\lambda - \frac{\mu}{r^2}\right)R = 0\\
+				R(0)\quad\mr{finit}\\
+				R(a) = 0
+			\end{array}
+		\right.\\
+		&\left\{ 
+			\begin{array}{lr}
+				\displaystyle\dv{^2\Phi}{\phi^2} + \mu \Phi = 0\\
+				\Phi(0) = \Phi(2\pi)\\
+				\Phi'(0) = \Phi'(2\pi)
+			\end{array}
+		\right.
+	\end{align}
+	\subsection{有阻尼的情形}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 	\section{定音鼓的发声机制}
 	\section{有固定音高乐器与无固定音高乐器}
-	\begin{thebibliography}{99}
-		\bibitem{ref1}Neville H. Fletcher, Thomas D. Rossing, The physics of musical instruments, Springer-Verlag, New York, 1991, 第18章.
-		\bibitem{ref2}理论物理学教程第七卷\,弹性理论（第五版）朗道\, 栗弗席茨\,第一章第二节
-	\end{thebibliography}
+	\bibliographystyle{unsrt}
+	\bibliography{ref}
 \end{document}
