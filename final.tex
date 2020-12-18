@@ -118,9 +118,10 @@
 	那么薄膜的小振动方程在任意一个直角坐标系下都可以写成：
 	\begin{align}
 		\pdv{^2 u}{x^2} + \pdv{^{2}u}{y^{2}} = \frac{1}{c^{2}}\pdv{^2 u}{t^2}\quad\quad\quad c^2 = \frac{\rho}{\sigma}
+		\label{wave eq}
 	\end{align}
 	\par 其中$c$称为波速。将要求解的就是这个波动方程，这是一个理想化的模型，我们做了足够多的假设。
-	\section{固定边界的圆膜自由振动}
+	\section{固定边界的圆膜的振动}
 	\subsection{问题的描述}
 	由于鼓面的四周是完全固定的，在考虑初始条件后可以构成一个定解问题。假设
 	圆膜的半径为$a$，给定初始时刻时圆膜上每一点的位移和速度，定解问题可以写为：
@@ -142,15 +143,16 @@
 				u|_{r=0}\,\mr{finit},\, u|_{r=a}=0\\
 				u|_{t=0} = F(r, \phi),\, \pdv{u}{t}|_{t=0} = G(r, \phi)
 			\end{array}
+			\label{wave eq of drum}
 		\right.
 	\end{align}
-	\par 注意到将直角坐标转换成极坐标时，人为地增添了一些边界条件，这些边界条
-	件在物理上很好理解：首先在直角坐标系中原点并不是奇点，因此转换为极坐标后我们
-	也得要求原点的解不能发散（不是奇点）；其次这个解应该是角度的周期函数，
-	因为转过$2\pi$角度后回到圆膜上同一个点，同一个点的振动是完全相同的。
-	\par 也可以给出从数学角度的理解（个人理解，其中可能包含不严谨
+	\par 将直角坐标转换成极坐标时，人为地增添了一些边界条件，这些边界条
+	件在物理上很好理解：首先在直角坐标系中原点并不是奇点，因此转换为极坐标后
+	也得要求原点的解不能发散（不是奇点）；其次解应该是角度的周期函数，
+	因为转过$2\pi$角度回到圆膜上同一个点，振动情况完全相同。
+	\par 也可以给出数学角度的理解（其中可能包含不严谨
 	的语言）：直角坐标与极坐标之间的变换将一个圆形和一个长方形对应了起来，
-	但是这个“对应”的性质并不总是很好，首先圆心处映射并不是单射，圆心对应于
+	但是这个“对应”的性质不总是很好，首先圆心处映射并不是单射，圆心对应于
 	长方形的一个边；其次边界并不对应边界，圆形的边界对应于长方形的一个边，
 	圆形区域内部的一条线（规定$\phi=0$的那条线）对应于长方形的两个边。
 	这个映射破坏了原本圆形的拓扑，相当于挖去了圆心后再沿圆心处将圆形剪开，
@@ -160,31 +162,35 @@
 	相当于将定义在矩形上的函数“沿着某个边粘起来”，使之可以定义在圆形的区域上。
 	\par 将要求解的是转化到极坐标后，与原来问题等价的方程。
 	\subsection{没有耗散的情形}
-	上面导出的方程对应于没有耗散的情形。首先假设方程具有满足$r\, \phi$方向
+	上面导出的方程对应于没有耗散的情形，希望能够通过求解方程给出固定边界
+	圆膜振动的普遍描述。首先假设方程具有满足$r\, \phi$方向
 	边界条件（不一定满足初始条件）的分离变量形式的特解：
 	\begin{align}
 		u(r, \phi, t) = v(r, \phi)T(t)
 	\end{align}
 	\par 将所有分离变量形式的解\textbf{线性组合}使其满足\textbf{初始条件}
-	就可以得到定解问题的解。将这样的解代入方程：
+	就可以得到定解问题的解。将这样的解代入方程并分离变量：
 	\begin{align}
 		\frac{1}{c^2}\frac{T''(t)}{T} = \frac{1}{rv(r,\phi)}\pdv{}{r}\left(r\pdv{v}{r}\right)
-		 + \frac{1}{r^2 v(r,\phi)}\pdv{^2 V}{\phi^2}
+		 + \frac{1}{r^2 v(r,\phi)}\pdv{^2 v}{\phi^2}
 	\end{align}
 	\par 方程两边没有相同的自变量，因此只能等于同一个常数，
 	令其为$-\lambda$，得到两个常微分方程：
 	\begin{align}
-		&T{''}(t) + \lambda c^2T(t) = 0\\
-		&\frac{1}{r}\pdv{}{r}\left(r\pdv{v}{r}\right) + \frac{1}{r^2}\pdv{^2 v}{\phi^2} + \lambda v = 0
+		T{''}(t) + \lambda c^2T(t) = 0
+		\label{time eq}
 	\end{align}
-	\par 其中$v$满足的$r, \phi$方向上的边界条件与$u$的相同，构成了一个偏微
-	分方程本征值问题，求解出所有的本征值$\lambda$与本征函数就可以得到圆膜振动
-	的驻波解，即得到了圆膜的每一个振动\textbf{频率}和对应的\textbf{振动模态}，
-	将这样的驻波解线性组合可以得到满足对应任意初始条件的波动方程的解，即圆膜
-	的任何一种振动都可以描述为不同振动模态以相应频率振动的线性组合，因此
-	只要研究清楚每一个振动模态的行为，就可以完全描述圆膜的振动。
-	\par 为了求解偏微分方程的本征值问题，进一步考虑$v$也有分离变量形式
-	的满足边界条件的解$v(r, \phi) = R(r)\Phi(\phi)$，带入方程得到：
+	\begin{align}
+		\frac{1}{r}\pdv{}{r}\left(r\pdv{v}{r}\right) + \frac{1}{r^2}\pdv{^2 v}{\phi^2} + \lambda v = 0
+		\label{mode}
+	\end{align}
+	\par 其中$v$满足的$r, \phi$方向上的边界条件与$u$的相同，共同构成一个偏微
+	分方程本征值问题，求解出所有本征值$\lambda$与本征函数并与对应的时间
+	方程的解组合就得到圆膜振动的一个特解，考虑到本征函数的完备性，这些解的
+	线性组合可以构成满足任意初始条件的解，因此研究这个偏微分方程的本征值
+	问题与对应的分离变量的解的性质对于研究圆膜振动有着重要的意义。
+	\par 为了求解偏微分方程本征值问题，进一步考虑$v$也有分离变量形式
+	的满足边界条件的解$v(r, \phi) = R(r)\Phi(\phi)$，带入方程分离变量得到：
 	\begin{align}
 		\frac{r}{R}\dv{}{r}\left(r\dv{R}{r}\right) + \lambda r^{2} = -\frac{1}{\Phi}\dv{^2 \Phi}{\phi^2} = \mu
 	\end{align}
@@ -204,7 +210,7 @@
 		\right.
 	\end{align}
 	\par 考虑到$R,\, \Phi$均不恒等于0（否则只能给出0解），
-	这些边界条件与分离变量产生的两个微分方程构成了常微分方程的本征值问题：
+	这些边界条件与分离变量产生的两个微分方程构成了常微分方程本征值问题：
 	\begin{equation}
 		\left\{ 
 			\begin{array}{lr}
@@ -238,10 +244,10 @@
 			\end{array}
 		\right.
 	\end{align}
-	\par 这里稍微注意一下对于同一个本征值$m^2 \neq 0$对应两个简并的本征函数；当$m^2=0$时，
+	\par 这里注意一下对于同一个本征值$m^2 \neq 0$对应两个简并的本征函数；但当$m^2=0$时，
 	仅对应一个本征函数$\Phi_{02} = 1$。
 	\par 对于本征值问题[\ref{non_reduced Bessel equation}]，首先将其转化为标准形式，
-	令$x = \sqrt{\lambda}r,\, y = R(r)$，本征值问题转化为一个标准形式：
+	令$x = \sqrt{\lambda}r,\, y = R(r)$：
 	\begin{align}
 		\left\{ 
 			\begin{array}{lr}
@@ -259,7 +265,7 @@
 		y(x) = AJ_{m}(x) + BN_{m}(x)
 	\end{align}
 	\par 其中$J_{m}(x),\,N_{m}(x)$为m阶Bessel函数与m阶Neumann函数。由于整数阶Neumann
-	函数在0处发散，所以为了满足$x=0$处函数值有界的边界条件，只能要求$B=0$。
+	函数在0处发散，为了满足$x=0$处函数值有界的边界条件，只能要求$B=0$。
 	带入另一个边界条件可以得到：
 	\begin{align}
 		J_{m}(\sqrt{\lambda}a) = 0
@@ -268,12 +274,100 @@
 	$\mu_{i}^{(m)}$表示m阶Bessel函数的零点（i是对于不同零点的一个标记），$\lambda$
 	满足的条件为：
 	\begin{align}
-		\sqrt{\lambda} a &= \mu_{i}^{(m)}\\
-		\Rightarrow \lambda &= \left(\frac{\mu_{i}^{(m)}}{a}\right)^2 
+		\sqrt{\lambda} a = \mu_{i}^{(m)}
+		\Rightarrow \lambda = \left(\frac{\mu_{i}^{(m)}}{a}\right)^2 
 	\end{align}
-	可以证明Bessel函数的零点均在实轴上\cite{specialfunction}，
-	对于整数阶Bessel函数，由于
-	\subsection{有阻尼的情形}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+	\par 可以证明Bessel函数的零点均对称分布在实轴上\cite{specialfunction}，
+	对于整数阶Bessel函数，由于其具有奇偶性\cite{mathematicalmethod}：$J_n(-x) = (-1)^n J_n(x)$
+	因此正根和负根给出线性相关的本征函数，不妨只考虑正根（如果考虑0为Bessel方程
+	的根即$\lambda = 0$的情况，会使得本征函数整体为0，舍去），每一个本征值
+	$\lambda_{mi} = \left(\frac{\mu_{i}^{(m)}}{a}\right)^2$对应一个
+	本征函数。
+	\par
+	至此我们得到了本征值问题[\ref{non_reduced Bessel equation}]的解：
+	\begin{equation}
+		\left\{ 
+		\begin{split}
+			\lambda_{mi} &= \left(\frac{\mu_{i}^{(m)}}{a}\right)^2\\
+			R_{mi} &= J_{m}\left(\frac{\mu_{i}^{(m)}r}{a}\right)\\
+			i &= 1, 2, 3,\cdots\\
+		\end{split}
+		\right.
+	\end{equation}
+	\par  其中$\mu_{i}^{(m)}$为m阶Bessel函数的第i个正零点。与角向方程
+	的本征值问题[\ref{angle equation}]的解组合后可以构成偏微分方程
+	本征值问题[\ref{mode}]的解：
+	\begin{equation}
+		\left\{
+		\begin{split}
+			\lambda_{mi} &= \left(\frac{\mu_{i}^{(m)}}{a}\right)^2\\
+			v_{1mi} &= J_m\left(\frac{\mu_{i}^{(m)}r}{a}\right)\sin(m\phi)\\
+			v_{1mi} &= J_m\left(\frac{\mu_{i}^{(m)}r}{a}\right)\sin(m\phi)\\
+			m &= 0,1,2,\cdots\quad \quad i = 1, 2, 3,\cdots
+		\end{split}
+		\right.
+	\end{equation}
+	\par 
+	在得到$\lambda$的取值后，可带入时间的方程[\ref{time eq}]得到对应的$T(t)$
+	的通解：
+	\begin{align}
+		T_{mi}(t) = A_{mi}\sin(\omega_{mi}t) + B_{mi}\cos(\omega_{mi}t)\quad \omega_{mi} = \frac{c\mu_{i}^{(m)}}{a}
+	\end{align}
+	\par 
+	\par 与对应的$v_{mi}$组合后可得到波动方程的特解：
+	\begin{equation}
+		\left\{
+			\begin{split}
+				u_{1mi} &= \sin(\omega_{mi}t + \phi_{1mi}) 
+				J_m\left(\frac{\mu_{i}^{(m)}r}{a}\right)\sin(m\phi)\\
+				u_{2mi} &= \sin(\omega_{mi}t + \phi_{2mi})
+				J_m\left(\frac{\mu_{i}^{(m)}r}{a}\right)\sin(m\phi)
+			\end{split}
+		\right.
+		\label{vb mode}
+	\end{equation}
+	\par 
+	仔细观察特解[\ref{vb mode}]的特点，它表示圆膜上每一个点都以\textbf{相同的频率}$\omega_{mi} = \frac{c\mu_{i}^{(m)}}{a}$
+	在平衡位置附近振动，振幅的分布用本征函数[\ref{mode}]描述，其上有始终不振动的点称为\textbf{波节}，
+	也有振幅为极大值的\textbf{波腹}，这样的波并不向远处传播而是在一定区域内以固定的模式振动，称其为
+	\textbf{驻波}，描述驻波的特解[\ref{vb mode}]称为\textbf{驻波解}，我们定义驻波解对应的振动模式
+	为圆膜振动的\textbf{振动模态}，使用本征值问题[\ref{mode}]的指标(m, i)来标记每一个振动模态
+	。由之前的讨论可知，定解问题[\ref{wave eq of drum}]的解均可以表示为驻波解的线性组合：
+	\begin{align}
+		u(r, \phi, t) = \sum_{m=0}^{+\infty}\sum_{i=1}^{+\infty}(A_{mi}u_{1mi} + B_{mi}u_{2mi})
+	\end{align}
+	那么圆膜的任意一种振动可以等价地看作不同的振动模态以不同初相位相位振动的叠加（如果单独讨论一个振动模态，解中的相位没有绝对意义，但是讨论多个
+	振动模态的叠加就要考虑振动的相位差）。因此，驻波解（振动模态）不但完备地描述了方程的解，而且具有清晰的物理图像。
+	\subsection{振动模态的可视化} 
+	\subsection{真实圆膜的振动}
+	\par 
+	在构建波动方程[\ref{wave eq}]时，只考虑了膜横向张力在法向的分力，但真实的
+	薄膜在振动过程中应考虑空气阻力与膜的法向张力的影响。一般而言，空气阻力使薄膜振动
+	模态的频率降低，而法向张力使薄膜振动模态的频率上升，但是对于\textbf{薄}膜，空气
+	阻力的影响是最主要的[\cite{phy_of_music}]。
+	\par 事实上空气阻力对于圆膜振动的影响非常复杂，应分为圆膜与自由空气的耦合、圆膜
+	与封闭空气室耦合两种情况讨论。对于后者，圆膜具有圆柱对称性（m=0）的振动模态
+	会使得空气不断压缩与膨胀，这时空气压力会加快振动频率同时使振幅衰减很快，而m>0的
+	振动模态只会使空气室内空气流动，不会压缩空气，这会使得所有非圆柱对称的振动模态
+	频率降低；自由空气不会涉及到压缩与膨胀的问题，因而会降低所有振动模态的频率。
+	\par
+	考虑最简单的情况，空气阻力正比于膜振动的速度$\pdv{u}{t}$，将波动方程修改为：
+	\begin{equation}
+		\pdv{^2u}{t^2} = c^2\left[\pdv{^2u}{x^2} + \pdv{^2u}{y^2}\right] + 2b\pdv{u}{t}
+	\end{equation}   
+	仿照之前分离变量解方程的过程，可看出分离变量后空间部分的方程与[\ref{mode}]
+	完全一致，而时间部分的方程变成了：
+	\begin{equation}
+		T_{mi}{''}(t) - 2bT_{mi}{'}(t) + c^2 \lambda_{mi} T_{mi}(t) = 0
+	\end{equation}
+	当阻尼足够小时($b^2 < c^2 \lambda$)这个方程的通解为：
+	\begin{equation}
+		T_{mi}(t) = A_{mi}\e^{-bt}\sin(\omega_{mi}{'}t + \phi_{mi})\quad\quad \omega_{mi}{'} = \sqrt{\left(\frac{c\mu_{i}^{(m)}}{a}\right)^2 - b^2}
+	\end{equation}
+	\par 从上面表达式可以看出，阻尼对于基频$\omega_{01}$的降低要比高频更加明显，即：
+	\begin{equation}
+		\frac{\omega_{mi}{'}}{\omega_{01}{'}} > \frac{\omega_{mi}}{\omega_{01}}\quad\quad \forall i > 1,\, m > 0
+	\end{equation}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 	\section{定音鼓的发声机制}
 	\section{有固定音高乐器与无固定音高乐器}
 	\section{致谢}
